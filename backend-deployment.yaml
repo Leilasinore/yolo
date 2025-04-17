@@ -17,16 +17,16 @@ spec:
       containers:
         - name: backend
           image: brianbwire/brian-yolo-backend:v1.0.0
-          command: ["npm", "start"] 
+          command: ['npm', 'start']
           ports:
-            - containerPort: 5000
+            - containerPort: 4000
           resources:
             limits:
-              memory: "256Mi"
-              cpu: "500m"
+              memory: '256Mi'
+              cpu: '500m'
             requests:
-              memory: "128Mi"
-              cpu: "250m"
+              memory: '128Mi'
+              cpu: '250m'
 ---
 apiVersion: v1
 kind: Service
@@ -38,7 +38,6 @@ spec:
     app: backend
   ports:
     - protocol: TCP
-      port: 5000
-      targetPort: 5000
+      port: 4000
+      targetPort: 4000
       nodePort: 30100
-  
