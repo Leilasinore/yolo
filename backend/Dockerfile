@@ -10,4 +10,12 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install
 
+# Copy the rest of the source code
+COPY . .
+
+# Stage 2: Create a minimal production image
+FROM alpine:3.21.3
+
+WORKDIR /app
+
 
