@@ -1,6 +1,19 @@
 version: "3.8"
 
 services:
+  #Builds the frontend Docker image and creates the frontend microservice
+  leila-yolo-frontend:
+    image: leilasinore/leila-yolo-frontend:v1.0.1
+    build: ./client
+    container_name: leila-yolo-frontend
+    stdin_open: true
+    tty: true
+    ports:
+      - "3000:3000"
+    depends_on: 
+      - leila-yolo-backend
+    networks:
+      - app-yolo-net
 
   #Builds the backend Docker image and creates the backend microservice
   leila-yolo-backend:
