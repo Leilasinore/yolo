@@ -13,3 +13,18 @@ RUN npm install
 # Copy the rest of the application code to the container
 COPY . .
 
+FROM alpine:3.21.3
+
+WORKDIR /app
+
+RUN apk update && apk add npm
+
+COPY --from=build  /app .
+
+# Expose the port the app runs on
+EXPOSE 3000
+
+# allow legacy OpenSSL 
+ENV NODE_OPTIONS=--openssl-legacy-provider
+# Define the command to run your app
+CMD ["npm", "start"]
