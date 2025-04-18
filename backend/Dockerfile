@@ -1,5 +1,5 @@
 # Stage 1: Build the application
-FROM node:22.14.0 AS build
+FROM node:22 AS build
 
 # Set working directory
 WORKDIR /app
@@ -17,6 +17,8 @@ COPY . .
 FROM alpine:3.21.3
 
 WORKDIR /app
+
+RUN apk update && apk add --update nodejs
 
 # Copy built app with dependencies from the build stage
 COPY --from=build /app .
