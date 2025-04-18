@@ -69,5 +69,7 @@ Both frontend and backend employ multi-stage builds to minimize the final image 
 - Maintained Consistent naming pattern across all  containers
 - Network and volume names follow the same pattern for consistency
 
-### DockerHub Deployment Screenshot
-![Leila Sinore Yolo](/assets/screenshots/leilasinore-yolo.png)
+### DockerHub Deployment Screenshots
+![Leila Sinore Yolo Repo](/assets/screenshots/leilasinore-yolo-images.png)
+![Leila Sinore Yolo Frontend](/assets/screenshots/leila-sinore-yolo-frontend.png)
+![Leila Sinore Yolo Backend](/assets/screenshots/leila-sinore-yolo-backend.png)
