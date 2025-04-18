@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+
+  #Builds the backend Docker image and creates the backend microservice
+  leila-yolo-backend:
+    image: leilasinore/leila-yolo-backend:v1.0.2
+    build: ./backend
+    container_name: leila-yolo-backend
+    stdin_open: true
+    tty: true
+    restart: always
+    ports:
+      - "4000:4000"
+    depends_on: 
+      - app-yolo-ip-mongo
+    networks:
+      - app-yolo-net
+
+  #Creates the database microservice
+  app-yolo-ip-mongo:
+    image: mongo
+    container_name: app-yolo-mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - app-yolo-net
+    volumes:
+      - type: volume
+        source: app-yolo-mongo-data
+        target: /data/db
+
+#Creates the network infrastructure necessary for the containers to communicate with each other
+networks:
+  app-yolo-net:
+    name: app-yolo-net
+    driver: bridge
+    attachable: true
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16 
+          ip_range: 172.20.0.0/16 
+
+#Creates a Docker volume that persists all the data stored in the database
+volumes:
+  app-yolo-mongo-data:
+    driver: local
