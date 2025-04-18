@@ -18,4 +18,13 @@ FROM alpine:3.21.3
 
 WORKDIR /app
 
+# Copy built app with dependencies from the build stage
+COPY --from=build /app .
+
+# Expose the app's port
+EXPOSE 4000
+
+# Start the app
+CMD ["node", "server.js"]
+
 
