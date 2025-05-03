@@ -1,0 +1,74 @@
+- hosts: all
+  become: True
+
+  tasks:
+    - name: update apt package index
+      ansible.builtin.apt:
+        update_cache: yes
+    - name: install required packages
+      ansible.builtin.apt:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+          - gnupg
+          - lsb-release
+        state: present
+    - name: add Docker official GPG key
+      ansible.builtin.apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+    - name: Add Docker repository for Ubuntu 20.04 (Focal)
+      ansible.builtin.apt_repository:
+        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
+        state: present
+    
+    - name: Install Docker and Docker Compose
+      apt:
+        name:
+         - docker-ce
+         - docker-ce-cli
+         - containerd.io
+         - docker-compose
+        state: present
+    - name: Create Docker CLI plugins directory
+      file:
+        path: /usr/local/lib/docker/cli-plugins
+        state: directory
+        mode: '0755'
+    - name: Enable Docker service
+      systemd:
+        name: docker
+        state: started
+        enabled: true
+    - name: Add vagrant user to Docker group
+      user:
+        name: vagrant
+        groups: docker
+        append: yes
+    - name: Clone application repo
+      git:
+       repo: https://github.com/Leilasinore/yolo.git
+       dest: /home/vagrant/app
+       version: master
+    - name: Start MongoDB using docker-compose
+      command: docker-compose up -d app-yolo-ip-mongo
+      args:
+       chdir: "/home/vagrant/app"
+    - name: Start backend container
+      command: docker-compose up -d leila-yolo-backend
+      args:
+       chdir: "/home/vagrant/app"
+    - name: Start froontend container
+      command: docker-compose up -d leila-yolo-frontend
+      args:
+       chdir: "/home/vagrant/app"
+    - name: Ensure OpenSSL legacy provider is enabled
+      lineinfile:
+       path: /etc/environment
+       line: 'NODE_OPTIONS=--openssl-legacy-provider'
+       create: yes
+    
+   
+    
