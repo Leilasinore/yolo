@@ -1,4 +1,4 @@
-# Independent Project: Stage 1 – Ansible Instrumentation
+# Yolo Project: Stage 1 – Ansible Instrumentation
 
 ## ✅ Objective
 
@@ -12,19 +12,39 @@ The Ansible project follows a standard best-practice structure:
 
 ```
 project-root/
-├── Vagrantfile
-├── playbook.yml
-├── ansible.cfg
-├── hosts
-├── roles/
-│   ├── system_setup/
-│   ├── docker_setup/
-│   ├── mongodb_setup/
-│   ├── backend/
-│   └── frontend/
-└── group_vars/
-    └── all/
-        └── main.yml
+├── client/                    # Frontend application
+│   ├── src/                   # Source code (React components, styles, etc.)
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── images/            # Images, icons, or other static assets
+│   │   └── App.js
+│   ├── public/                # Static files (HTML template, favicon, etc.)
+│   ├── package.json           # Frontend dependencies
+│   └── Dockerfile             # Dockerfile for frontend container
+├── backend/                   # Backend application
+│   ├── routes/                # Express routes for handling APIs
+│   ├── models/                # MongoDB schemas and models
+│   ├── server.js              # Backend entry point
+│   ├── package.json           # Backend dependencies
+│   └── Dockerfile             # Dockerfile for backend container
+├── db/                        # MongoDB initialization scripts (optional)
+│   └── init-db.js
+├── docker-compose.yml         # Orchestration of all services
+├── ansible/                   # Ansible automation scripts
+│   ├── playbook.yml           # Defines provisioning tasks
+│   ├── roles/                 # Modular automation roles
+│   │   ├── system_config/     # Prepares environment and installs dependencies
+│   │   ├── docker_setup/      # Installs and configures Docker
+│   │   ├── frontend_setup/    # Deploys the frontend container
+│   │   ├── backend_setup/     # Deploys the backend container
+│   │   ├── mongo_setup/       # Deploys the MongoDB container
+│   │   ├── legacy/            # Contains the deprecated app_deployment role for reference
+│   │   │   ├── app_deployment/ # Previous deployment role (archived for historical reference)
+├── vagrant/                   # Vagrant environment configuration
+│   ├── Vagrantfile             # Defines VM setup and automation triggers
+├── explanation.md             # Project explanation (documentation)
+├── README.md                  # Project overview and setup instructions
+└── .gitignore                 # Files to exclude from Git tracking
 ```
 
 ---
