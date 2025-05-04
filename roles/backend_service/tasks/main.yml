@@ -1,3 +1,11 @@
 #SPDX-License-Identifier: MIT-0
 ---
 # tasks file for backend_service
+- name: Start backend using docker-compose
+  community.docker.docker_compose_v2:
+    project_src: /home/vagrant/app
+    services:
+      - leila-yolo-backend
+    state: present
+    remove_orphans: yes
+  tags: backend

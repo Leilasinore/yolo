@@ -5,6 +5,7 @@
     - system_setup
     - docker_setup
     - mongodb_service
+    - backend_service
     
    
     
