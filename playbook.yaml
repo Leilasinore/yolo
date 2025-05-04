@@ -15,6 +15,18 @@
           - gnupg
           - lsb-release
         state: present
+    
+    - name: Ensure destination directory exists
+      file:
+        path: /home/vagrant/app
+        state: directory
+    - name: Clone application repo
+      git:
+       repo: https://github.com/Leilasinore/yolo.git
+       dest: /home/vagrant/app
+       clone: yes
+       update: yes
+       version: master
     - name: add Docker official GPG key
       ansible.builtin.apt_key:
         url: https://download.docker.com/linux/ubuntu/gpg
@@ -23,7 +35,6 @@
       ansible.builtin.apt_repository:
         repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
         state: present
-    
     - name: Install Docker and Docker Compose
       apt:
         name:
@@ -32,11 +43,6 @@
          - containerd.io
          - docker-compose
         state: present
-    - name: Create Docker CLI plugins directory
-      file:
-        path: /usr/local/lib/docker/cli-plugins
-        state: directory
-        mode: '0755'
     - name: Enable Docker service
       systemd:
         name: docker
@@ -47,23 +53,32 @@
         name: vagrant
         groups: docker
         append: yes
-    - name: Clone application repo
-      git:
-       repo: https://github.com/Leilasinore/yolo.git
-       dest: /home/vagrant/app
-       version: master
     - name: Start MongoDB using docker-compose
-      command: docker-compose up -d app-yolo-ip-mongo
-      args:
-       chdir: "/home/vagrant/app"
-    - name: Start backend container
-      command: docker-compose up -d leila-yolo-backend
-      args:
-       chdir: "/home/vagrant/app"
-    - name: Start froontend container
-      command: docker-compose up -d leila-yolo-frontend
-      args:
-       chdir: "/home/vagrant/app"
+      community.docker.docker_compose_v2:
+       project_src: /home/vagrant/app
+       services:
+        - app-yolo-ip-mongo
+       state: present
+       recreate: always
+       remove_orphans: yes
+      tags: db
+    - name: Start backend using docker-compose
+      community.docker.docker_compose_v2:
+       project_src: /home/vagrant/app
+       services:
+        - leila-yolo-backend
+       state: present
+       remove_orphans: yes
+      tags: backend
+    - name: Start frontend using docker-compose
+      community.docker.docker_compose_v2:
+       project_src: /home/vagrant/app
+       services:
+        - leila-yolo-frontend
+       state: present
+       recreate: always
+       remove_orphans: yes
+      tags: frontend
     - name: Ensure OpenSSL legacy provider is enabled
       lineinfile:
        path: /etc/environment
