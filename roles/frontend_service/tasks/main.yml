@@ -1,3 +1,17 @@
 #SPDX-License-Identifier: MIT-0
 ---
 # tasks file for frontend_service
+- name: Start frontend using docker-compose
+  community.docker.docker_compose_v2:
+    project_src: /home/vagrant/app
+    services:
+      - leila-yolo-frontend
+    state: present
+    recreate: always
+    remove_orphans: yes
+  tags: frontend
+- name: Ensure OpenSSL legacy provider is enabled
+  lineinfile:
+    path: /etc/environment
+    line: 'NODE_OPTIONS=--openssl-legacy-provider'
+    create: yes
