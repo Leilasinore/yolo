@@ -3,15 +3,15 @@
 # tasks file for frontend_service
 - name: Start frontend using docker-compose
   community.docker.docker_compose_v2:
-    project_src: /home/vagrant/app
+    project_src: "{{ frontend_project_src }}"
     services:
-      - leila-yolo-frontend
+      - "{{ frontend_service_name }}"
     state: present
     recreate: always
     remove_orphans: yes
   tags: frontend
 - name: Ensure OpenSSL legacy provider is enabled
   lineinfile:
-    path: /etc/environment
-    line: 'NODE_OPTIONS=--openssl-legacy-provider'
+    path: "{{ node_options_env_path }}"
+    line: "{{ node_options_legacy }}"
     create: yes

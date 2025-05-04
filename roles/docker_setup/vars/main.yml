@@ -1,3 +1,11 @@
 #SPDX-License-Identifier: MIT-0
 ---
 # vars file for docker_setup
+docker_gpg_key_url: https://download.docker.com/linux/ubuntu/gpg
+docker_repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
+docker_packages:
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
+  - docker-compose
+docker_user: vagrant

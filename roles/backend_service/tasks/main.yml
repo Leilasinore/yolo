@@ -3,9 +3,9 @@
 # tasks file for backend_service
 - name: Start backend using docker-compose
   community.docker.docker_compose_v2:
-    project_src: /home/vagrant/app
+    project_src: "{{ backend_project_src }}"
     services:
-      - leila-yolo-backend
+      - "{{ backend_service_name }}"
     state: present
     remove_orphans: yes
   tags: backend

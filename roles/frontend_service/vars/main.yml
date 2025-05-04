@@ -1,3 +1,8 @@
 #SPDX-License-Identifier: MIT-0
 ---
 # vars file for frontend_service
+frontend_project_src: /home/vagrant/app
+frontend_service_name: leila-yolo-frontend
+
+node_options_env_path: /etc/environment
+node_options_legacy: 'NODE_OPTIONS=--openssl-legacy-provider'

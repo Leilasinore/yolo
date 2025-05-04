@@ -3,9 +3,9 @@
 # tasks file for mongodb_service
 - name: Start MongoDB using docker-compose
   community.docker.docker_compose_v2:
-    project_src: /home/vagrant/app
+    project_src: "{{ mongodb_project_src }}"
     services:
-      - app-yolo-ip-mongo
+      - "{{ mongodb_service_name }}"
     state: present
     recreate: always
     remove_orphans: yes
