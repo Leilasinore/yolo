@@ -1,0 +1,28 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for system_setup
+- name: update apt package index
+  ansible.builtin.apt:
+      update_cache: yes
+- name: install required packages
+  ansible.builtin.apt:
+    name:
+     - apt-transport-https
+     - ca-certificates
+     - curl
+     - software-properties-common
+     - gnupg
+     - lsb-release
+    state: present
+    
+- name: Ensure destination directory exists
+  file:
+    path: /home/vagrant/app
+    state: directory
+- name: Clone application repo
+  git:
+    repo: https://github.com/Leilasinore/yolo.git
+    dest: /home/vagrant/app
+    clone: yes
+    update: yes
+    version: master
