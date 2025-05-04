@@ -1,3 +1,12 @@
 #SPDX-License-Identifier: MIT-0
 ---
 # tasks file for mongodb_service
+- name: Start MongoDB using docker-compose
+  community.docker.docker_compose_v2:
+    project_src: /home/vagrant/app
+    services:
+      - app-yolo-ip-mongo
+    state: present
+    recreate: always
+    remove_orphans: yes
+  tags: db

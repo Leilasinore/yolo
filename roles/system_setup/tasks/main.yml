@@ -1,6 +1,7 @@
 #SPDX-License-Identifier: MIT-0
 ---
 # tasks file for system_setup
+
 - name: update apt package index
   ansible.builtin.apt:
       update_cache: yes
