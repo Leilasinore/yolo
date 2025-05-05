@@ -1,0 +1,10 @@
+- hosts: all
+  become: True
+
+  roles:
+    - system_setup
+    - docker_setup
+    - mongodb_service
+    - backend_service
+    - frontend_service
+    
