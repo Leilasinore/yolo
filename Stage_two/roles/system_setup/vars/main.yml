@@ -1,0 +1,14 @@
+#SPDX-License-Identifier: MIT-0
+---
+# vars file for system_setup
+system_packages:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - software-properties-common
+  - gnupg
+  - lsb-release
+
+app_directory: /home/vagrant/app
+app_repo_url: https://github.com/Leilasinore/yolo.git
+app_repo_branch: master
