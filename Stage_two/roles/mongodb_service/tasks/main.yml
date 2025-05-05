@@ -1,3 +1,12 @@
 #SPDX-License-Identifier: MIT-0
 ---
 # tasks file for mongodb_service
+- name: Start MongoDB using docker-compose
+  community.docker.docker_compose_v2:
+    project_src: "{{ mongodb_project_src }}"
+    services:
+      - "{{ mongodb_service_name }}"
+    state: present
+    recreate: always
+    remove_orphans: yes
+  tags: db
