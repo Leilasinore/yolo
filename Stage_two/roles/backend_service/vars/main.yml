@@ -1,3 +1,5 @@
 #SPDX-License-Identifier: MIT-0
 ---
 # vars file for backend_service
+backend_project_src: /home/vagrant/app
+backend_service_name: leila-yolo-backend
