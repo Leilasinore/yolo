@@ -12,6 +12,7 @@ NB:For a detailed explanation of implementation details checkout the explanation
 - **Vagrant**: Provisioning and managing the virtual machine.
 - **Docker**: Containerization of the frontend, backend, and MongoDB.
 - **Git**: Used for cloning the application repository.
+- - **Ansible**: Used for running playbooks.
 
 ---
 
@@ -37,7 +38,7 @@ vagrant up
 This will:
 - Download the Ubuntu 20.04 box (if not already downloaded).
 - Provision the VM with the necessary configurations defined in the playbooks.
-
+Open your browser and visit http://localhost:3000 to access the application
 ### 3. **Ansible Playbook Execution**
 
 Ensure Ansible is installed. If not, [install Ansible](https://docs.ansible.com/ansible/latest/installation_guide/index.html).
