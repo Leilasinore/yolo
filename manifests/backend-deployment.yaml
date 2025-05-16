@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: leilasinore/leila-yolo-backend:v1.0.2
+          image: docker.io/leilasinore/leila-yolo-backend:v1.0.3
           ports:
             - containerPort: 5000
           resources:
