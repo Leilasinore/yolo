@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: docker.io/leilasinore/leila-yolo-frontend:v1.0.4
+          image: docker.io/leilasinore/leila-yolo-frontend:v1.0.5
           ports:
             - containerPort: 3000
           env:
