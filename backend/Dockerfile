@@ -24,7 +24,7 @@ RUN apk update && apk add --update nodejs
 COPY --from=build /app .
 
 # Expose the app's port
-EXPOSE 4000
+EXPOSE 5000
 
 # Start the app
 CMD ["node", "server.js"]
